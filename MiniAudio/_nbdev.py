@@ -2,9 +2,20 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"ArraySpec": "Data.ipynb",
+         "ArraySignal": "Data.ipynb",
+         "TensorSpec": "Data.ipynb",
+         "TensorSignal": "Data.ipynb",
+         "encodes": "Data.ipynb",
+         "get_audio_files": "Data.ipynb",
+         "audio_extensions": "Data.ipynb",
+         "Spectify": "Data.ipynb",
+         "AudioLoader": "Data.ipynb",
+         "SpecBlock": "Data.ipynb",
+         "SignalBlock": "Data.ipynb",
+         "Clipper": "Data.ipynb"}
 
-modules = []
+modules = ["data.py"]
 
 doc_url = "https://hoftherose.github.io"
 

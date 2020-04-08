@@ -1,6 +1,8 @@
 {
   "MiniAudio": {
     "Overview": "/",
-    "module name here": "/core"
+    "Audio Data": "/Data",
+    "Spectrograms": "/Spectrograms",
+    "Synthesizer": "/Synthesizer"
   }
 }

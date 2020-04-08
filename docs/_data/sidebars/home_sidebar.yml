@@ -10,8 +10,14 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
-      url: /core
+      title: Audio Data
+      url: /Data
+    - output: web,pdf
+      title: Spectrograms
+      url: /Spectrograms
+    - output: web,pdf
+      title: Synthesizer
+      url: /Synthesizer
     output: web
     title: MiniAudio
   output: web

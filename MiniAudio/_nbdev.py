@@ -13,9 +13,14 @@ index = {"ArraySpec": "Data.ipynb",
          "AudioLoader": "Data.ipynb",
          "SpecBlock": "Data.ipynb",
          "SignalBlock": "Data.ipynb",
-         "Clipper": "Data.ipynb"}
+         "Clipper": "Data.ipynb",
+         "Invertible1x1Conv": "Layers.ipynb",
+         "WeightedConv1d": "Layers.ipynb",
+         "WaveNetLayer": "Layers.ipynb",
+         "WaveNet": "Layers.ipynb"}
 
-modules = ["data.py"]
+modules = ["data.py",
+           "layers.py"]
 
 doc_url = "https://hoftherose.github.io"
 

@@ -2,6 +2,7 @@
   "MiniAudio": {
     "Overview": "/",
     "Audio Data": "/Data",
+    "Layers": "/Layers",
     "Spectrograms": "/Spectrograms",
     "Synthesizer": "/Synthesizer"
   }

@@ -13,6 +13,9 @@ entries:
       title: Audio Data
       url: /Data
     - output: web,pdf
+      title: Layers
+      url: /Layers
+    - output: web,pdf
       title: Spectrograms
       url: /Spectrograms
     - output: web,pdf

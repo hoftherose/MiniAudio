@@ -143,10 +143,10 @@ inverse</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(tensor([[[-3.0882],
-          [-1.8305],
-          [-1.0546]]], grad_fn=&lt;SqueezeBackward1&gt;),
- tensor(1.2899e-07, grad_fn=&lt;MulBackward0&gt;))</pre>
+<pre>(tensor([[[-3.1741],
+          [-1.0841],
+          [-1.6582]]], grad_fn=&lt;SqueezeBackward1&gt;),
+ tensor(1.9837e-07, grad_fn=&lt;MulBackward0&gt;))</pre>
 </div>
 
 </div>
@@ -259,7 +259,7 @@ inverse</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor([[[1.0838, 1.2428]]], grad_fn=&lt;SqueezeBackward1&gt;)</pre>
+<pre>tensor([[[-0.1110, -0.0748]]], grad_fn=&lt;SqueezeBackward1&gt;)</pre>
 </div>
 
 </div>
@@ -301,7 +301,7 @@ inverse</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">44100</span><span class="p">)</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">441000</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -335,7 +335,7 @@ inverse</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="mi">44100</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="mi">441000</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
     </div>
@@ -350,7 +350,7 @@ inverse</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(84, 87)</pre>
+<pre>(84, 431)</pre>
 </div>
 
 </div>
@@ -368,7 +368,7 @@ inverse</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="mi">44100</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">168</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="mi">44100</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">168</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
     </div>
@@ -383,7 +383,7 @@ inverse</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(168, 173)</pre>
+<pre>(168, 862)</pre>
 </div>
 
 </div>
@@ -401,7 +401,7 @@ inverse</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">168</span><span class="p">,</span> <span class="mi">173</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">168</span><span class="p">,</span> <span class="mi">862</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -450,7 +450,74 @@ inverse</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>torch.Size([1, 168, 45056])</pre>
+<pre>torch.Size([1, 168, 221440])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">431</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">upsample</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose1d</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span><span class="mi">84</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">upsample</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>torch.Size([1, 84, 221184])</pre>
 </div>
 
 </div>
@@ -601,7 +668,10 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wavenet</span> <span class="o">=</span> <span class="n">WaveNet</span><span class="p">(</span><span class="n">n_mel_channels</span><span class="o">=</span><span class="mi">168</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">testWaveNet</span><span class="p">(</span><span class="n">n_mel_channels</span><span class="o">=</span><span class="mi">84</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">wavenet</span> <span class="o">=</span> <span class="n">WaveNet</span><span class="p">(</span><span class="n">n_mel_channels</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">wavenet</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">431</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -611,6 +681,12 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="One-Wavenet-Layer">One Wavenet Layer<a class="anchor-link" href="#One-Wavenet-Layer"> </a></h2>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -618,7 +694,9 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">wavenet</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">168</span><span class="p">,</span> <span class="mi">862</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">testWaveNet</span><span class="p">(</span><span class="n">n_layers</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">empty_cache</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -631,7 +709,9 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>torch.Size([1, 168, 221440])
+<pre>torch.Size([1, 256, 221184])
+CPU times: user 153 ms, sys: 12.3 ms, total: 166 ms
+Wall time: 165 ms
 </pre>
 </div>
 </div>
@@ -642,6 +722,12 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="More-Wavenet-Layers">More Wavenet Layers<a class="anchor-link" href="#More-Wavenet-Layers"> </a></h2>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -649,7 +735,9 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ans</span><span class="o">.</span><span class="n">shape</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">testWaveNet</span><span class="p">()</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">empty_cache</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -661,12 +749,12 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <div class="output_area">
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>torch.Size([1, 256, 221440])</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>torch.Size([1, 256, 221184])
+CPU times: user 67.6 ms, sys: 7.07 ms, total: 74.7 ms
+Wall time: 73.9 ms
+</pre>
 </div>
-
 </div>
 
 </div>

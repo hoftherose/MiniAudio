@@ -66,12 +66,12 @@ class WaveNetLayer(torch.nn.Module):
     """
     def __init__(self, n_mel_channels, kernel_size, dilation, padding):
         super(WaveNetLayer, self).__init__()
-        self.SigmDilation = WeightedConv1d(n_mel_channels, 2*n_mel_channels, kernel_size,
+        self.SigmDilation = WeightedConv1d(n_mel_channels, n_mel_channels//2, kernel_size,
                                            dilation=dilation, padding=padding)
-        self.TanhDilation = WeightedConv1d(n_mel_channels, 2*n_mel_channels, kernel_size,
+        self.TanhDilation = WeightedConv1d(n_mel_channels, n_mel_channels//2, kernel_size,
                                            dilation=dilation, padding=padding)
-        self.ResLinear = torch.nn.Conv1d(2*n_mel_channels,n_mel_channels, 1, stride=1)
-        self.OutLinear = torch.nn.Conv1d(2*n_mel_channels,n_mel_channels, 1, stride=1)
+        self.ResLinear = torch.nn.Conv1d(n_mel_channels//2,n_mel_channels, 1, stride=1)
+        self.OutLinear = torch.nn.Conv1d(n_mel_channels//2,n_mel_channels, 1, stride=1)
     def forward(self, x):
         sigm_output = torch.nn.Sigmoid()(self.SigmDilation(x))
         tanh_output = torch.nn.Tanh()(self.TanhDilation(x))
@@ -85,15 +85,14 @@ class WaveNet(torch.nn.Module):
     def __init__(self, n_mel_channels, precision, n_layers, kernel_size):
         super(WaveNet, self).__init__()
         store_attr(self, 'n_mel_channels, precision, n_layers, kernel_size')
-        self.upsample = torch.nn.ConvTranspose1d(n_mel_channels,n_mel_channels,1024, stride=256)
+        self.upsample = torch.nn.ConvTranspose1d(n_mel_channels,n_mel_channels,1024, stride=512)
         self.WaveNetLayers = torch.nn.ModuleList()
         for i in range(self.n_layers):
             dilation = 2 ** i
             padding = int((kernel_size * dilation - dilation) / 2)
             self.WaveNetLayers.append(WaveNetLayer(n_mel_channels, kernel_size, dilation, padding))
-        self.end = torch.nn.Sequential(torch.nn.ReLU(),torch.nn.Conv1d(n_mel_channels,n_mel_channels//2, 1),
-                                       torch.nn.ReLU(),torch.nn.Conv1d(n_mel_channels//2,n_mel_channels//4, 1),
-                                       torch.nn.ReLU(),torch.nn.Conv1d(n_mel_channels//4,precision, 1),
+        self.end = torch.nn.Sequential(torch.nn.ReLU(),torch.nn.Conv1d(n_mel_channels,n_mel_channels*2, 1),
+                                       torch.nn.ReLU(),torch.nn.Conv1d(n_mel_channels*2,precision, 1),
                                        torch.nn.Softmax(dim=1))
 
     def forward(self, spec):
@@ -102,5 +101,4 @@ class WaveNet(torch.nn.Module):
             out, x = self.WaveNetLayers[i](x)
             if i == 0: output = out
             else:      output = out+output
-        print(output.shape)
         return self.end(output)

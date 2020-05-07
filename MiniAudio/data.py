@@ -14,7 +14,7 @@ import numpy as np
 class ArraySpec(ndarray):
     #TODO Inherite from ArrayImage
     _show_args = {'cmap':'gist_gray', 'x_axis':'s', 'y_axis':'linear'}
-    sr = 44100
+    sr = 22050
     def __new__(cls, x, *args, **kwargs):
         if isinstance(x,tuple): super().__new__(cls, x, *args, **kwargs)
         if not isinstance(x,ndarray): x = array(x, np.float64)
@@ -26,7 +26,7 @@ class ArraySpec(ndarray):
 # Cell
 class ArraySignal(ndarray):
     _show_args = {'x_axis':'s'}
-    sr = 44100
+    sr = 22050
     def __new__(cls, x, *args, **kwargs):
         if isinstance(x,tuple): super().__new__(cls, x, *args, **kwargs)
         if not isinstance(x,ndarray): x = array(x, np.float64)

@@ -16,11 +16,17 @@ entries:
       title: Layers
       url: /Layers
     - output: web,pdf
+      title: Segmentation Models U-Net
+      url: /Segmentation
+    - output: web,pdf
       title: Spectrograms
       url: /Spectrograms
     - output: web,pdf
       title: Synthesizer
       url: /Synthesizer
+    - output: web,pdf
+      title: Audio Transforms
+      url: /Transforms
     output: web
     title: MiniAudio
   output: web

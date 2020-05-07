@@ -64,7 +64,7 @@ description: "Important Model Layers for audio related tasks."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Invertible1x1Conv" class="doc_header"><code>class</code> <code>Invertible1x1Conv</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L9" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Invertible1x1Conv</code>(<strong><code>c</code></strong>) :: <code>Module</code></p>
+<h2 id="Invertible1x1Conv" class="doc_header"><code>class</code> <code>Invertible1x1Conv</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L10" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Invertible1x1Conv</code>(<strong><code>c</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>The layer outputs both the convolution, and the log determinant
 of its weight matrix.  If reverse=True it does convolution with
@@ -143,10 +143,10 @@ inverse</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(tensor([[[-3.1741],
-          [-1.0841],
-          [-1.6582]]], grad_fn=&lt;SqueezeBackward1&gt;),
- tensor(1.9837e-07, grad_fn=&lt;MulBackward0&gt;))</pre>
+<pre>(tensor([[[-1.6221],
+          [-3.3548],
+          [-0.3380]]], grad_fn=&lt;SqueezeBackward1&gt;),
+ tensor(-1.1921e-07, grad_fn=&lt;MulBackward0&gt;))</pre>
 </div>
 
 </div>
@@ -192,344 +192,6 @@ inverse</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Audio-Conv">Audio Conv<a class="anchor-link" href="#Audio-Conv"> </a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Dilated-Conv">Dilated Conv<a class="anchor-link" href="#Dilated-Conv"> </a></h2>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dila_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dilation</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">4.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">4.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">4.</span><span class="p">]]])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">out</span> <span class="o">=</span> <span class="n">dila_conv</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
-<span class="n">out</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>tensor([[[-0.1110, -0.0748]]], grad_fn=&lt;SqueezeBackward1&gt;)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="UpSampling">UpSampling<a class="anchor-link" href="#UpSampling"> </a></h2>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">MiniAudio.data</span> <span class="kn">import</span> <span class="n">Clipper</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">441000</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">librosa</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="mi">441000</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>(84, 431)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="mi">44100</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">168</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>(168, 862)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">168</span><span class="p">,</span> <span class="mi">862</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">upsample</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose1d</span><span class="p">(</span><span class="mi">168</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">upsample</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>torch.Size([1, 168, 221440])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">431</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">upsample</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose1d</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span><span class="mi">84</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">upsample</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>torch.Size([1, 84, 221184])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="WaveNet-Layer">WaveNet Layer<a class="anchor-link" href="#WaveNet-Layer"> </a></h1>
 </div>
 </div>
@@ -558,7 +220,7 @@ inverse</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="WeightedConv1d" class="doc_header"><code>WeightedConv1d</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L57" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>WeightedConv1d</code>(<strong><code>in_channels</code></strong>, <strong><code>out_channels</code></strong>, <strong><code>kernel_size</code></strong>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>padding</code></strong>=<em><code>0</code></em>, <strong><code>dilation</code></strong>=<em><code>1</code></em>, <strong><code>groups</code></strong>=<em><code>1</code></em>, <strong><code>bias</code></strong>=<em><code>True</code></em>, <strong><code>padding_mode</code></strong>=<em><code>'zeros'</code></em>)</p>
+<h4 id="WeightedConv1d" class="doc_header"><code>WeightedConv1d</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>WeightedConv1d</code>(<strong><code>in_channels</code></strong>, <strong><code>out_channels</code></strong>, <strong><code>kernel_size</code></strong>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>padding</code></strong>=<em><code>0</code></em>, <strong><code>dilation</code></strong>=<em><code>1</code></em>, <strong><code>groups</code></strong>=<em><code>1</code></em>, <strong><code>bias</code></strong>=<em><code>True</code></em>, <strong><code>padding_mode</code></strong>=<em><code>'zeros'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -589,7 +251,7 @@ inverse</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="WaveNetLayer" class="doc_header"><code>class</code> <code>WaveNetLayer</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L63" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>WaveNetLayer</code>(<strong><code>n_mel_channels</code></strong>, <strong><code>kernel_size</code></strong>, <strong><code>dilation</code></strong>, <strong><code>padding</code></strong>) :: <code>Module</code></p>
+<h2 id="WaveNetLayer" class="doc_header"><code>class</code> <code>WaveNetLayer</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L64" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>WaveNetLayer</code>(<strong><code>n_mel_channels</code></strong>, <strong><code>kernel_size</code></strong>, <strong><code>dilation</code></strong>, <strong><code>padding</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>Traditional WaveNet Layer which outputs both the residual value and the output.</p>
 
@@ -621,7 +283,7 @@ inverse</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="WaveNet" class="doc_header"><code>class</code> <code>WaveNet</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L84" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>WaveNet</code>(<strong><code>n_mel_channels</code></strong>, <strong><code>precision</code></strong>, <strong><code>n_layers</code></strong>, <strong><code>kernel_size</code></strong>) :: <code>Module</code></p>
+<h2 id="WaveNet" class="doc_header"><code>class</code> <code>WaveNet</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L85" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>WaveNet</code>(<strong><code>n_mel_channels</code></strong>, <strong><code>precision</code></strong>, <strong><code>n_layers</code></strong>, <strong><code>kernel_size</code></strong>, <strong><code>sample_rate</code></strong>, <strong><code>time</code></strong>) :: <code>Module</code></p>
 </blockquote>
 <p>Base class for all neural network modules.</p>
 <p>Your models should also subclass this class.</p>
@@ -657,24 +319,80 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Tests">Tests<a class="anchor-link" href="#Tests"> </a></h2>
+<h1 id="U-Net">U-Net<a class="anchor-link" href="#U-Net"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Basic-U-Net">Basic U-Net<a class="anchor-link" href="#Basic-U-Net"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Layers">Layers<a class="anchor-link" href="#Layers"> </a></h3>
 </div>
 </div>
 </div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">testWaveNet</span><span class="p">(</span><span class="n">n_mel_channels</span><span class="o">=</span><span class="mi">84</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">wavenet</span> <span class="o">=</span> <span class="n">WaveNet</span><span class="p">(</span><span class="n">n_mel_channels</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
-    <span class="n">ans</span> <span class="o">=</span> <span class="n">wavenet</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">431</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
+</div>
+    {% endraw %}
 
-    </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="conv_block" class="doc_header"><code>class</code> <code>conv_block</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L108" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>conv_block</code>(<strong><code>in_ch</code></strong>, <strong><code>out_ch</code></strong>) :: <code>Module</code></p>
+</blockquote>
+<p>| Conv2d, BatchNorm, ReLU | -&gt; | Conv2d BatchNorm ReLU | -&gt;</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="up_conv" class="doc_header"><code>class</code> <code>up_conv</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L127" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>up_conv</code>(<strong><code>in_ch</code></strong>, <strong><code>out_ch</code></strong>) :: <code>Module</code></p>
+</blockquote>
+<p>| Upsample | -&gt; | Conv2d BatchNorm ReLU | -&gt;</p>
+
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -683,37 +401,42 @@ parameters converted too when you call :meth:<code>to</code>, etc.</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="One-Wavenet-Layer">One Wavenet Layer<a class="anchor-link" href="#One-Wavenet-Layer"> </a></h2>
+<h3 id="Model">Model<a class="anchor-link" href="#Model"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://raw.githubusercontent.com/bigmb/Unet-Segmentation-Pytorch-Nest-of-Unets/master/images/unet1.png" alt="U-Net implementation from https://github.com/bigmb/Unet-Segmentation-Pytorch-Nest-of-Unets"></p>
+
 </div>
 </div>
 </div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">testWaveNet</span><span class="p">(</span><span class="n">n_layers</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">empty_cache</span><span class="p">()</span>
-</pre></div>
+</div>
+    {% endraw %}
 
-    </div>
-</div>
-</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>torch.Size([1, 256, 221184])
-CPU times: user 153 ms, sys: 12.3 ms, total: 166 ms
-Wall time: 165 ms
-</pre>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="U_Net" class="doc_header"><code>class</code> <code>U_Net</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L145" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>U_Net</code>(<strong><code>in_ch</code></strong>=<em><code>3</code></em>, <strong><code>out_ch</code></strong>=<em><code>1</code></em>) :: <code>Module</code></p>
+</blockquote>
+<p>UNet - Basic Implementation
+Paper : <a href="https://arxiv.org/abs/1505.04597">https://arxiv.org/abs/1505.04597</a></p>
+
 </div>
+
 </div>
 
 </div>
@@ -724,37 +447,40 @@ Wall time: 165 ms
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="More-Wavenet-Layers">More Wavenet Layers<a class="anchor-link" href="#More-Wavenet-Layers"> </a></h2>
+<h2 id="Recurrent-U-Net">Recurrent U-Net<a class="anchor-link" href="#Recurrent-U-Net"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Layers">Layers<a class="anchor-link" href="#Layers"> </a></h3>
 </div>
 </div>
 </div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">testWaveNet</span><span class="p">()</span>
-<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">empty_cache</span><span class="p">()</span>
-</pre></div>
+</div>
+    {% endraw %}
 
-    </div>
-</div>
-</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>torch.Size([1, 256, 221184])
-CPU times: user 67.6 ms, sys: 7.07 ms, total: 74.7 ms
-Wall time: 73.9 ms
-</pre>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Recurrent_block" class="doc_header"><code>class</code> <code>Recurrent_block</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L223" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Recurrent_block</code>(<strong><code>out_ch</code></strong>, <strong><code>t</code></strong>=<em><code>2</code></em>) :: <code>Module</code></p>
+</blockquote>
+<p>Recurrent Block for R2Unet_CNN</p>
+
 </div>
+
 </div>
 
 </div>
@@ -763,6 +489,226 @@ Wall time: 73.9 ms
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="RRCNN_block" class="doc_header"><code>class</code> <code>RRCNN_block</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L246" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RRCNN_block</code>(<strong><code>in_ch</code></strong>, <strong><code>out_ch</code></strong>, <strong><code>t</code></strong>=<em><code>2</code></em>) :: <code>Module</code></p>
+</blockquote>
+<p>Recurrent Residual Convolutional Neural Network Block</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Model">Model<a class="anchor-link" href="#Model"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://raw.githubusercontent.com/bigmb/Unet-Segmentation-Pytorch-Nest-of-Unets/master/images/r2unet.png" alt="Recurrent U-Net implementation from https://github.com/bigmb/Unet-Segmentation-Pytorch-Nest-of-Unets"></p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="R2U_Net" class="doc_header"><code>class</code> <code>R2U_Net</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L266" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>R2U_Net</code>(<strong><code>img_ch</code></strong>=<em><code>3</code></em>, <strong><code>output_ch</code></strong>=<em><code>1</code></em>, <strong><code>t</code></strong>=<em><code>2</code></em>) :: <code>Module</code></p>
+</blockquote>
+<p>R2U-Unet implementation
+Paper: <a href="https://arxiv.org/abs/1802.06955">https://arxiv.org/abs/1802.06955</a></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Attention-U-Net">Attention U-Net<a class="anchor-link" href="#Attention-U-Net"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Layers">Layers<a class="anchor-link" href="#Layers"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Attention_block" class="doc_header"><code>class</code> <code>Attention_block</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L350" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Attention_block</code>(<strong><code>F_g</code></strong>, <strong><code>F_l</code></strong>, <strong><code>F_int</code></strong>) :: <code>Module</code></p>
+</blockquote>
+<p>Attention Block</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Model">Model<a class="anchor-link" href="#Model"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://raw.githubusercontent.com/bigmb/Unet-Segmentation-Pytorch-Nest-of-Unets/master/images/att-unet.png" alt="Attention U-Net implementation from https://github.com/bigmb/Unet-Segmentation-Pytorch-Nest-of-Unets"></p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="AttU_Net" class="doc_header"><code>class</code> <code>AttU_Net</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L385" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AttU_Net</code>(<strong><code>img_ch</code></strong>=<em><code>3</code></em>, <strong><code>output_ch</code></strong>=<em><code>1</code></em>) :: <code>Module</code></p>
+</blockquote>
+<p>Attention Unet implementation
+Paper: <a href="https://arxiv.org/abs/1804.03999">https://arxiv.org/abs/1804.03999</a></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Attention-and-Recurrent-U-Net">Attention and Recurrent U-Net<a class="anchor-link" href="#Attention-and-Recurrent-U-Net"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://raw.githubusercontent.com/bigmb/Unet-Segmentation-Pytorch-Nest-of-Unets/master/images/att-r2u.png" alt="Recurrent Attention U-Net implementation from https://github.com/bigmb/Unet-Segmentation-Pytorch-Nest-of-Unets"></p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="R2AttU_Net" class="doc_header"><code>class</code> <code>R2AttU_Net</code><a href="https://github.com/hoftherose/MiniAudio/tree/master/MiniAudio/layers.py#L473" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>R2AttU_Net</code>(<strong><code>in_ch</code></strong>=<em><code>3</code></em>, <strong><code>out_ch</code></strong>=<em><code>1</code></em>, <strong><code>t</code></strong>=<em><code>2</code></em>) :: <code>Module</code></p>
+</blockquote>
+<p>Residual Recuurent Block with attention Unet
+Implementation : <a href="https://github.com/LeeJunHyun/Image_Segmentation">https://github.com/LeeJunHyun/Image_Segmentation</a></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Export">Export<a class="anchor-link" href="#Export"> </a></h1>
+</div>
+</div>
+</div>
 </div>
  
 

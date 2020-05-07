@@ -3,7 +3,9 @@
     "Overview": "/",
     "Audio Data": "/Data",
     "Layers": "/Layers",
+    "Segmentation Models U-Net": "/Segmentation",
     "Spectrograms": "/Spectrograms",
-    "Synthesizer": "/Synthesizer"
+    "Synthesizer": "/Synthesizer",
+    "Audio Transforms": "/Transforms"
   }
 }

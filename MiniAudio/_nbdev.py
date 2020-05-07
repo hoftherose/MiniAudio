@@ -17,10 +17,25 @@ index = {"ArraySpec": "Data.ipynb",
          "Invertible1x1Conv": "Layers.ipynb",
          "WeightedConv1d": "Layers.ipynb",
          "WaveNetLayer": "Layers.ipynb",
-         "WaveNet": "Layers.ipynb"}
+         "WaveNet": "Layers.ipynb",
+         "conv_block": "Layers.ipynb",
+         "up_conv": "Layers.ipynb",
+         "U_Net": "Layers.ipynb",
+         "Recurrent_block": "Layers.ipynb",
+         "RRCNN_block": "Layers.ipynb",
+         "R2U_Net": "Layers.ipynb",
+         "Attention_block": "Layers.ipynb",
+         "AttU_Net": "Layers.ipynb",
+         "R2AttU_Net": "Layers.ipynb",
+         "NormalizeAudio": "Transforms.ipynb",
+         "MuLawEncoding": "Transforms.ipynb",
+         "get_pitch": "Transforms.ipynb",
+         "frequency_order": "Transforms.ipynb",
+         "Stft2d": "Transforms.ipynb"}
 
 modules = ["data.py",
-           "layers.py"]
+           "layers.py",
+           "transforms.py"]
 
 doc_url = "https://hoftherose.github.io"
 
